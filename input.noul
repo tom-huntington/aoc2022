@@ -1,0 +1,34 @@
+year := 2022;
+
+bold        := \text -> F"\x1b[1m{text}\x1b[0m";
+bold_red    := \text -> F"\x1b[1;31m{text}\x1b[0m";
+bold_green  := \text -> F"\x1b[1;32m{text}\x1b[0m";
+bold_yellow := \text -> F"\x1b[1;33m{text}\x1b[0m";
+
+advent_session := try
+	read_file("session") then strip
+catch e ->
+	throw F"couldn't get session: {e}. do you have a session file?";
+advent_input := \day -> (
+	if ("clipboard" in argv) (
+		print! bold_red("USING CLIPBOARD");
+		utf8_decode! run_process! 'xclip', '-selection c -out'.words
+	) else switch (read_file? F"p{day}.in")
+	case null -> (
+		print "requesting...";
+		t := request!
+			F"https://adventofcode.com/{year}/day/{day}/input",
+			{
+				"headers": {
+					"Cookie": F"session={advent_session}",
+					"User-Agent": "betaveros's AoC noulith library https://github.com/betaveros/advent-of-code-2022",
+				}
+			};
+		write_file(F"p{day}.in")(t);
+		print "requested";
+		t
+	)
+	case s -> (print "cached"; s)
+);
+
+for(day<- 1 to 25) advent_input(day);

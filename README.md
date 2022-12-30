@@ -1,3 +1,9 @@
+# Functional python examples
+
+refactored kaa-the-wise's one line aoc solutions. Much of the solutions are pure functional showing how to use accumulate (i.e. scan)
+
+original readme:
+
 # AOC 2022 Python one-liners
 
 Python one-liners for https://adventofcode.com/2022.
