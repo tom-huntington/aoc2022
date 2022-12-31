@@ -18,16 +18,15 @@ ms=[parse_monkey(m) for m in stdin.read().split('\n\n')]
 
 M=reduce(mul,(m[2] for m in ms))
 
-# any(((w:=eval(m[1])%M),ms[m[4] if w%m[2] else m[3]][0].append(w)) and m[0].pop() and m[5].insert(0,m[5].pop()+1) for _ in range(10000) for m in ms for old in [*m[0]])
+def throw_item(m, old):
+    w=eval(m[1])%M
+    dest = m[4] if w%m[2] else m[3]
+    ms[dest][0].append(w)
+    m[0].pop()
+    m[5].insert(0,m[5].pop()+1)
 
-for _ in range(10000):
-    for m in ms:
-        for old in [*m[0]]:
-            w=eval(m[1])%M
-            dest = m[4] if w%m[2] else m[3]
-            ms[dest][0].append(w)
-            m[0].pop()
-            m[5].insert(0,m[5].pop()+1)
+
+any(throw_item(m, old) for _ in range(10000) for m in ms for old in [*m[0]])
 
 x=[*sorted(m[5][0] for m in ms)]
 print(x[-2]*x[-1])

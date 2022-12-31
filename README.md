@@ -2,6 +2,14 @@
 
 refactored kaa-the-wise's one line aoc solutions. Much of the solutions are pure functional showing how to use accumulate (i.e. scan)
 
+Notable solutions are the impure ones:
+- 5: impure map
+- 7: impure reduce
+- 11: impure any
+
+Notable pure solutions:
+- 9: accumulate
+
 original readme:
 
 # AOC 2022 Python one-liners
