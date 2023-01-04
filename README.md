@@ -6,7 +6,7 @@ Notable solutions are the impure ones:
 - 5: impure map
 - 7: impure reduce
 - 11: impure any
-- 12: impure accumulate (discarding input range)
+- 12: impure accumulate (discarding input range i.e. iterative function application)
 - 14: impure recursion
 
 Notable pure solutions:
