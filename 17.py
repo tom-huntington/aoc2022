@@ -34,7 +34,7 @@ R = [(0b0,
 (tower:=[])
 (collision:=lambda h, r: h<0 or any(map(and_,r,tower[h:])))
 
-wall_collision = lambda r, d: any(x&(63*d+1) for x in r)
+wall_collision = lambda r, d: any(x&(0b1000000 if d else 0b0000001) for x in r)
 
 (shift:=lambda r, d: r if wall_collision(r, d) else [x<<1 if d else x>>1 for x in r])
 
