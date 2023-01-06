@@ -32,13 +32,14 @@ transition = {}
 trav = lambda d: d*-1j # traversal direction
 nxt = lambda x,d:[(x,d*-1j), (x+trav(d),d), (x+trav(d)*(1j+1), d*1j)][angle(x,d)]
 
-def angle(x,d):
-    match (x+trav(d) in board, # front
-           x+trav(d)*(1j+1) in board): # front-left
-        case True, True: return REFLEX
-        case (True, False)| \
-             (False, True): return STRAIGHT
-        case False, False: return RIGHT
+angle = lambda x,d: len({x+trav(d), x+trav(d)*(1j+1)} & board.keys())
+# def angle(x,d):
+#     match (x+trav(d) in board, # front
+#            x+trav(d)*(1j+1) in board): # front-left
+#         case True, True: return REFLEX
+#         case (True, False)| \
+#              (False, True): return STRAIGHT
+#         case False, False: return RIGHT
 
 # d is exit direction, d*-1j is traversal direction
 
